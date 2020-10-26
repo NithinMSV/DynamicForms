@@ -1,12 +1,11 @@
 <template>
-    <div class="desktop-scanner">
-        <p class="decode-result">Last result: <b>{{ result }}</b></p>
-
+    <div class="scanner">
         <qrcode-drop-zone @decode="onDecode" @init="logErrors">
         <qrcode-stream @decode="onDecode" @init="onInit" />
         </qrcode-drop-zone>
 
         <qrcode-capture v-if="noStreamApiSupport" @decode="onDecode" />
+        <p class="decode-result">Last result: <b>{{ result }}</b></p>
     </div>
 </template>
 
@@ -49,8 +48,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.desktop-scanner {
+.scanner {
     height: 500px;
     width: 500px;
+}
+
+@media all and (max-width: 768px) and (orientation: portrait){
+.scanner {
+  position: relative;
+  left: 15%;
+  height: 150px;
+  width: 250px;
+  text-align: left;
+}
+
 }
 </style>
