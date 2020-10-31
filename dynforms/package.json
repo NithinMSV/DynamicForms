@@ -9,10 +9,14 @@
   },
   "dependencies": {
     "@ionic/vue": "^5.4.1",
+    "ant-design-vue": "^1.7.1",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.18.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-qrcode-reader": "^2.3.14",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
