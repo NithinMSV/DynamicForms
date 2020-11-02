@@ -4,42 +4,65 @@
     <div class="component-stack">
       <div class="comp-head">
         <h3>Component Stack - Widgets</h3>
-        <div class="widgets select" v-if="showWidgets == false">
-        <h3 @click="result(widget)" v-for="(widget, index) in widgets" :key="index">
-          <a href="#"><span class="badge badge-pill badge-dark" draggable="true">{{widget.name}}</span></a>
-          </h3>
+        <div class="widgets select">
+        <div class="container">
+        <div class="row">
+        <div class="col-sm">
+        <div class="input-group mb-3">
+          <select class="custom-select" id="inputGroupSelect01" v-model="selected">
+            <option selected>Choose...</option>
+            <option v-for="(widget, index) in widgets" :key="index">{{widget.name}}</option>
+          </select>
+        </div>
+        </div>
+          <div class="col-sm">
+          <b-button v-on:click="result(selected)" variant="outline-primary">Add Widget</b-button>
+          </div>
         </div>
       </div>
     </div>
+      </div>
     <div class="formarea">
       <h3>Component Creator - Drag & Drop here</h3>
       <div class="drop">
+        <div v-for="(select,index) in selections" v-bind:key="index">
+            {{select.value}}
+            <b-button variant="outline-primary" @click="removeSelection(select)">Remove</b-button>
+        </div>
+        <div v-if="value === 'Button'">
+        <btn />
+      </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
 
-export default {
+import btn from '../components/FormCreator/button'
+
+export default { 
   name: "FormWidgets",
+  components: {
+    btn
+  },
   data() {
     return{
-    showWidgets: false,
-    selectedWidget: {},
+      selected:'',
+      selections: [],
     widgets: [
       {
         name: 'Logo',
-        type: String,
-        value: 'logo'
+        value: ''
       },
       {
         name: 'First Name',
-        value: ''
+        value: 'First name'
       },
       {
         name: 'Last Name',
-        value: ''
+        value: 'Last name'
       },
       {
         name: 'Address',
@@ -89,11 +112,25 @@ export default {
   }
   },
   methods: {
-    result: function(widget) {
-      alert("Clicked: " + widget.name);
+    result: function(selected) {
+      // alert("Clicked: " + selected);
+      console.log(selected);
+      this.selections.push({
+        value: this.selected
+      });
+      this.selected = '';
+    },
+    removeSelection(select) {
+      const selectedIndex = this.selections.indexOf(select);
+      this.selections.splice(selectedIndex, 1);
     }
-    }
-}
+    // add: function() {
+    //   this.selections.push({
+    //     name: this.selected
+    //   });
+    // }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -122,15 +159,6 @@ export default {
 
 .formarea {
   position: relative;
-}
-
-.widgets {
-  position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-self: flex-end;
-  cursor: pointer;
 }
 
 .hovered {
