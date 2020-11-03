@@ -27,11 +27,17 @@
       <div class="drop">
         <div v-for="(select,index) in selections" v-bind:key="index">
             {{select.value}}
+        <div v-if="select.value === 'First Name'">
+          <firstname />
+        </div>
+        <div v-if="select.value === 'Button'">
+        <btn />
+        </div>
             <b-button variant="outline-primary" @click="removeSelection(select)">Remove</b-button>
         </div>
-        <div v-if="value === 'Button'">
-        <btn />
-      </div>
+      <!-- <div v-for="(select,index) in selections" v-bind:key="index">
+        
+      </div> -->
       </div>
     </div>
   </div>
@@ -45,7 +51,8 @@ import btn from '../components/FormCreator/button'
 export default { 
   name: "FormWidgets",
   components: {
-    btn
+    btn,
+    // firstname
   },
   data() {
     return{
@@ -66,47 +73,47 @@ export default {
       },
       {
         name: 'Address',
-        value: ''
+        value: 'Address'
       },
       {
         name: 'Mobile Number',
-        value: ''
+        value: 'Mobile Number'
       },
       {
         name: 'Email Address',
-        value: ''
+        value: 'Email Address'
       },
       {
         name: 'Dropdown',
-        value: ''
+        value: 'Dropdown'
       },
       {
         name: 'Checkbox',
-        value: ''
+        value: 'Checkbox'
       },
       {
         name: 'Radio Button',
-        value: ''
+        value: 'Radio Button'
       },
       {
         name: 'Message',
-        value: ''
+        value: 'Message'
       },
       {
         name: 'Button',
-        value: ''
+        value: 'Button'
       },
       {
         name: 'File Upload',
-        value: ''
+        value: 'File Upload'
       },
       {
         name: 'Text',
-        value: ''
+        value: 'Text'
       },
       {
         name: 'Signature Placeholder',
-        value: ''
+        value: 'Signature Placeholder'
       }
     ]
   }
