@@ -23,18 +23,38 @@
     </div>
       </div>
     <div class="formarea">
-      <h3>Component Creator - Drag & Drop here</h3>
+      <h3>Component Creator</h3>
       <div class="drop">
         <div v-for="(select,index) in selections" v-bind:key="index">
             {{select.value}}
+        <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-4">
         <div v-if="select.value === 'First Name'">
-          <firstname />
+        <textfield placeholder="Enter First Name" v-model="fn"/>
+        </div>
+        <div v-if="select.value === 'Last Name'">
+        <textfield placeholder="Enter Last Name" v-model="fn"/>
+        </div>
+        <div v-if="select.value === 'Email Address'">
+        <email />
+        </div>
+        <div v-if="select.value === 'Message'">
+        <messagefield />
         </div>
         <div v-if="select.value === 'Button'">
-        <btn />
+        <btn btnname="Submit"/>
         </div>
-            <b-button variant="outline-primary" @click="removeSelection(select)">Remove</b-button>
         </div>
+        <div class="col-4">
+        <b-button variant="outline-danger" class="mb-2" @click="removeSelection(select)">
+          <b-icon icon="trash" aria-hidden="true"></b-icon>
+        </b-button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- @click="removeSelection(select)" -->
       <!-- <div v-for="(select,index) in selections" v-bind:key="index">
         
       </div> -->
@@ -47,12 +67,17 @@
 <script>
 
 import btn from '../components/FormCreator/button'
+import email from '../components/FormCreator/email'
+import textfield from '../components/FormCreator/text'
+import messagefield from '../components/FormCreator/message'
 
 export default { 
   name: "FormWidgets",
   components: {
     btn,
-    // firstname
+    textfield,
+    email,
+    messagefield
   },
   data() {
     return{
@@ -108,12 +133,16 @@ export default {
         value: 'File Upload'
       },
       {
-        name: 'Text',
-        value: 'Text'
+        name: 'Custom Textbox',
+        value: 'Custom Textbox'
       },
       {
         name: 'Signature Placeholder',
         value: 'Signature Placeholder'
+      },
+      {
+        name: 'Date',
+        value: 'Date'
       }
     ]
   }
