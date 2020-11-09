@@ -13,6 +13,9 @@
             <option selected>Choose...</option>
             <option v-for="(widget, index) in widgets" :key="index">{{widget.name}}</option>
           </select>
+      <!-- <b-form-select v-model="selected">
+      <b-form-select-option v-for="(widget, index) in widgets" :key="index">{{widget.name}}</b-form-select-option>
+      </b-form-select> -->
         </div>
         </div>
           <div class="col-sm">
@@ -28,22 +31,50 @@
         <div v-for="(select,index) in selections" v-bind:key="index">
             {{select.value}}
         <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-around">
         <div class="col-4">
-        <div v-if="select.value === 'First Name'">
-        <textfield placeholder="Enter First Name" v-model="fn"/>
+        <div v-if="select.value === 'Name'">
+        <name />
         </div>
-        <div v-if="select.value === 'Last Name'">
-        <textfield placeholder="Enter Last Name" v-model="fn"/>
+        <div v-if="select.value === 'Text Box'">
+        <Textfield labelplaceholder="Enter Text Box Name" placeholder="Value goes here" :test="fn"/>
+        <p>{{printValue(fn)}}</p>
         </div>
         <div v-if="select.value === 'Email Address'">
         <email />
         </div>
+        <div v-if="select.value === 'Address (Single Text Box)'">
+        <Messagefield placeholder="Enter Address"/>
+        </div>
+        <div v-if="select.value === 'Dropdown'">
+        <dropdown />
+        </div>
+        <div v-if="select.value === 'Checkbox'">
+        <checkbox />
+        </div>
+        <div v-if="select.value === 'Radio Button'">
+        <radio />
+        </div>
+        <div v-if="select.value === 'Date'">
+        <date />
+        </div>
+        <div v-if="select.value === 'File Upload'">
+        <file />
+        </div>
         <div v-if="select.value === 'Message'">
-        <messagefield />
+        <Messagefield placeholder="Enter Message"/>
+        </div>
+        <div v-if="select.value === 'Ask Questions'">
+        <askquestions />
+        </div>
+        <div v-if="select.value === 'Rating'">
+        <rating />
+        </div>
+        <div v-if="select.value === 'Signature Placeholder'">
+        <file />
         </div>
         <div v-if="select.value === 'Button'">
-        <btn btnname="Submit"/>
+        <Btn btnname="Submit"/>
         </div>
         </div>
         <div class="col-4">
@@ -66,21 +97,40 @@
 
 <script>
 
-import btn from '../components/FormCreator/button'
+import Name from '../components/FormCreator/name'
+import Btn from '../components/FormCreator/button'
 import email from '../components/FormCreator/email'
-import textfield from '../components/FormCreator/text'
-import messagefield from '../components/FormCreator/message'
+import Textfield from '../components/FormCreator/text'
+import Messagefield from '../components/FormCreator/message'
+import dropdown from '../components/FormCreator/dropdown'
+import checkbox from '../components/FormCreator/checkbox'
+import radio from '../components/FormCreator/radio'
+import file from '../components/FormCreator/file'
+import date from '../components/FormCreator/date'
+import rating from '../components/FormCreator/rating'
+import askquestions from '../components/FormCreator/askquestion'
 
 export default { 
   name: "FormWidgets",
   components: {
-    btn,
-    textfield,
+    Name,
+    Btn,
+    Textfield,
     email,
-    messagefield
+    Messagefield,
+    dropdown,
+    checkbox,
+    radio,
+    file,
+    date,
+    rating,
+    askquestions
   },
   data() {
     return{
+      fn: '',
+      ln: '',
+      text: '',
       selected:'',
       selections: [],
     widgets: [
@@ -89,15 +139,15 @@ export default {
         value: ''
       },
       {
-        name: 'First Name',
-        value: 'First name'
+        name: 'Name',
+        value: 'Name'
       },
       {
-        name: 'Last Name',
-        value: 'Last name'
+        name: 'Text Box',
+        value: 'Text Box'
       },
       {
-        name: 'Address',
+        name: 'Address (Single Text Box)',
         value: 'Address'
       },
       {
@@ -143,6 +193,14 @@ export default {
       {
         name: 'Date',
         value: 'Date'
+      },
+      {
+        name: 'Rating',
+        value: 'Rating'
+      },
+      {
+        name: 'Ask Questions',
+        value: 'Ask Questions'
       }
     ]
   }
@@ -159,12 +217,19 @@ export default {
     removeSelection(select) {
       const selectedIndex = this.selections.indexOf(select);
       this.selections.splice(selectedIndex, 1);
-    }
+    },
+    printValue(fn) {
+      console.log(fn);
+    },
     // add: function() {
     //   this.selections.push({
     //     name: this.selected
     //   });
     // }
+        handleOk(e) {
+        console.log(e);
+        this.visible = false;
+    }
   }
 };
 </script>
@@ -211,7 +276,7 @@ export default {
   height: 500px;
   margin-left: 20px;
   margin-right: 20px;
-  background-color: darkseagreen;
+  background-color: white;
 }
 
 @media all and (max-width: 768px) and (orientation: portrait){
