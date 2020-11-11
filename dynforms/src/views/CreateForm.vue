@@ -28,11 +28,13 @@
     <div class="formarea">
       <h3>Component Creator</h3>
       <div class="drop">
+        <draggable class="list-group" :list="selections" group="components">
         <div v-for="(select,index) in selections" v-bind:key="index">
-            {{select.value}}
-        <div class="container">
+        <div class="container style" id="element">
+          <a-tooltip placement="right" title="I'm Draggable :)">
         <div class="row justify-content-around">
         <div class="col-4">
+          {{select.value}}
         <div v-if="select.value === 'Name'">
         <name />
         </div>
@@ -83,14 +85,16 @@
         </b-button>
         </div>
         </div>
+        </a-tooltip>
         </div>
+        </div>
+        </draggable>
         </div>
         <!-- @click="removeSelection(select)" -->
       <!-- <div v-for="(select,index) in selections" v-bind:key="index">
         
       </div> -->
       </div>
-    </div>
   </div>
   </div>
 </template>
@@ -110,6 +114,8 @@ import date from '../components/FormCreator/date'
 import rating from '../components/FormCreator/rating'
 import askquestions from '../components/FormCreator/askquestion'
 
+import draggable from 'vuedraggable'
+
 export default { 
   name: "FormWidgets",
   components: {
@@ -124,7 +130,8 @@ export default {
     file,
     date,
     rating,
-    askquestions
+    askquestions,
+    draggable
   },
   data() {
     return{
@@ -183,10 +190,6 @@ export default {
         value: 'File Upload'
       },
       {
-        name: 'Custom Textbox',
-        value: 'Custom Textbox'
-      },
-      {
         name: 'Signature Placeholder',
         value: 'Signature Placeholder'
       },
@@ -226,10 +229,6 @@ export default {
     //     name: this.selected
     //   });
     // }
-        handleOk(e) {
-        console.log(e);
-        this.visible = false;
-    }
   }
 };
 </script>
@@ -251,7 +250,7 @@ export default {
   background-color: yellow;
   .comp-head {
     position: relative;
-    height: 100px;
+    height: 100%;
   }
   .comp-head h3{
     font-size: 20px;
@@ -269,6 +268,23 @@ export default {
 
 .invisible {
   display: none;
+}
+
+.style {
+  border: 2px solid blueviolet;
+  border-radius: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  cursor: all-scroll;
+}
+
+.col-4 {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.container {
+    margin-top: 25px;
 }
 
 .drop {
