@@ -1,7 +1,27 @@
 <template>
     <div>
-    <b-form-select v-model="selected" :options="options"></b-form-select>
-    <div>Selected: <strong>{{ selected }}</strong></div>
+    <b-form-select v-model="selected" :options="optionsSelections"></b-form-select>
+    <div>Selected options: <strong>{{ selected }}</strong></div>
+    <b-form-input v-model="selectedOption" v-on:keyup.enter="result(selectedOption)" placeholder="Enter the options"></b-form-input>
+    <div>Update option: <strong>{{ selectedOption }}</strong></div>
+    <b-button variant="outline-success" v-on:click="result(selectedOption)" class="mb-2">
+        <b-icon icon="plus-circle-fill" aria-hidden="true"></b-icon>
+    </b-button>
+    <div>Updated options: <strong>{{ optionsSelections }}</strong></div>
+    <div class="container">
+    <div class="row">
+    <div class="col-4">
+    <ul>
+      <li v-for="(optSelected,index) in optionsSelections" :key="index.id">
+        {{optSelected.text}}
+        <b-button variant="outline-danger" class="mb-2" @click="removeOptions(optSelected)">
+          <b-icon icon="trash" aria-hidden="true"></b-icon>
+        </b-button>
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
     </div>
 </template>
 
@@ -10,15 +30,29 @@
       name: 'dropdown',
     data() {
       return {
-        selected: null,
-        options: [
-          { value: null, text: 'Please select an option' },
-          { value: 'a', text: 'This is First option' },
-          { value: 'b', text: 'Selected Option' },
-          { value: { C: '3PO' }, text: 'This is an option with object value' },
-          { value: 'd', text: 'This one is disabled', disabled: true }
-        ]
+        selected: '',
+        selectedOption: '',
+        optSelected: '',
+        optionsSelections: [],
+        counter: 0
       }
+    },
+      methods: {
+        result: function(selectedOption) {
+      // alert("Clicked: " + selected);
+      console.log(selectedOption);
+      this.optionsSelections.push({
+        text: this.selectedOption,
+        value: this.counter+=1
+      });
+      this.selectedOption = '';
+      console.log(this.optionsSelections);
+      alert("Your option " + "'" + selectedOption + "' "+"is successfully added!")
+    },
+    removeOptions(optSelected) {
+      const selectedIndex = this.optionsSelections.indexOf(optSelected);
+      this.optionsSelections.splice(selectedIndex, 1);
+    },
     }
-  }
+  };
 </script>
