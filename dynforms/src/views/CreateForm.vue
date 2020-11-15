@@ -30,10 +30,12 @@
       <div class="drop">
         <draggable class="list-group" :list="selections" group="components">
         <div v-for="(select,index) in selections" v-bind:key="index">
-        <div class="container style" id="element">
+        <div class="card text-white border-dark bg-dark mb-3">
+        <div class="card-body">
+        <div class="container" id="element">
           <a-tooltip placement="right" title="I'm Draggable :)">
         <div class="row justify-content-around">
-        <div class="col-4">
+        <div class="col-sm">
           {{select.value}}
         <div v-if="select.value === 'Name'">
         <name />
@@ -50,6 +52,9 @@
         </div>
         <div v-if="select.value === 'Dropdown'">
         <dropdown />
+        </div>
+        <div v-if="select.value === 'Mobile Number'">
+        <contact />
         </div>
         <div v-if="select.value === 'Checkbox'">
         <checkbox />
@@ -79,13 +84,15 @@
         <Btn btnname="Submit"/>
         </div>
         </div>
-        <div class="col-4">
+        <div class="col-sm">
         <b-button variant="outline-danger" class="mb-2" @click="removeSelection(select)">
           <b-icon icon="trash" aria-hidden="true"></b-icon>
         </b-button>
         </div>
         </div>
         </a-tooltip>
+        </div>
+        </div>
         </div>
         </div>
         </draggable>
@@ -112,6 +119,7 @@ import radio from '../components/FormCreator/radio'
 import file from '../components/FormCreator/file'
 import date from '../components/FormCreator/date'
 import rating from '../components/FormCreator/rating'
+import contact from '../components/FormCreator/contact'
 import askquestions from '../components/FormCreator/askquestion'
 
 import draggable from 'vuedraggable'
@@ -126,6 +134,7 @@ export default {
     Messagefield,
     dropdown,
     checkbox,
+    contact,
     radio,
     file,
     date,
@@ -295,6 +304,13 @@ export default {
   background-color: white;
 }
 
+.card {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 25px;
+  cursor: all-scroll;
+}
+
 @media all and (max-width: 768px) and (orientation: portrait){
 .component-stack {
   background-color: yellow;
@@ -305,6 +321,12 @@ export default {
   .comp-head h3{
     font-size: 20px;
   }
+}
+.card {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 25px;
+  cursor: all-scroll;
 }
 }
 </style>
