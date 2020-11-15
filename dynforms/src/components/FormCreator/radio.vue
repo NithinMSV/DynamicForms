@@ -46,10 +46,20 @@
       // alert("Clicked: " + selected);
       console.log(selectedOption);
       if (this.selectedOption === ''|| this.selectedOption === null || this.selectedOption === 0){
-        alert("Option not entered!")
+        this.$toast.open({
+          message: 'Please enter the option in the text box',
+          duration: 3000,
+          type: 'warning',
+          position: 'top'
+        })
       }
       else if(this.optionsSelections.some(option => option.text === this.selectedOption)) {
-        alert("Option '"+selectedOption+ "' already exist")
+        this.$toast.open({
+          message: 'Option is already exist! Please enter different option!',
+          duration: 3000,
+          type: 'warning',
+          position: 'top'
+        })
       }
       else{
       this.optionsSelections.push({
@@ -58,12 +68,23 @@
       });
       this.selectedOption = '';
       console.log(this.optionsSelections);
-      alert("Your option " + "'" + selectedOption + "' "+"is successfully added!")
+      this.$toast.open({
+          message: 'Option is successfully added!',
+          duration: 3000,
+          type: 'success',
+          position: 'top'
+        })
     }
     },
     removeOptions(optSelected) {
       const selectedIndex = this.optionsSelections.indexOf(optSelected);
       this.optionsSelections.splice(selectedIndex, 1);
+      this.$toast.open({
+          message: 'Option is successfully removed!',
+          duration: 3000,
+          type: 'success',
+          position: 'top'
+        })
     },
   }
   }

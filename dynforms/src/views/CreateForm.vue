@@ -149,6 +149,16 @@ export default {
       text: '',
       selected:'',
       selections: [],
+      // form: {
+      //   message: 'This is a sample message',
+      //   type: 'success',
+      //   duration: 3000,
+      //   dismissible: true,
+      //   queue: false,
+      //   position: 'top-left',
+      //   onClick: this.onClick,
+      //   onDismiss: this.onDismiss,
+      // },
     widgets: [
       {
         name: 'Logo',
@@ -220,15 +230,37 @@ export default {
   methods: {
     result: function(selected) {
       // alert("Clicked: " + selected);
+      if(selected == 'Choose...' || selected == '') {
+        this.$toast.open({
+          message: 'Please choose a widget from the dropdown!',
+          duration: 3000,
+          type: 'error',
+          position: 'top'
+        })
+      }
+      else {
       console.log(selected);
       this.selections.push({
         value: this.selected
       });
       this.selected = '';
+      this.$toast.open({
+          message:  'Widget added successful!',
+          duration: this.form.duration,
+          type: 'success',
+          position: 'top'
+        })
+    }
     },
     removeSelection(select) {
       const selectedIndex = this.selections.indexOf(select);
       this.selections.splice(selectedIndex, 1);
+      this.$toast.open({
+          message:  'Widget removed successful!',
+          duration: 3000,
+          type: 'error',
+          position: 'top'
+        })
     },
     printValue(fn) {
       console.log(fn);
