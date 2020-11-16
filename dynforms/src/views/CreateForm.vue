@@ -19,7 +19,7 @@
         </div>
         </div>
           <div class="col-sm">
-          <b-button v-on:click="result(selected)" variant="outline-primary">Add Widget</b-button>
+          <b-button @click="result(selected)" variant="outline-primary">Add Widget</b-button>
           </div>
         </div>
       </div>
@@ -29,6 +29,7 @@
       <h3>Component Creator</h3>
       <div class="drop">
         <draggable class="list-group" :list="selections" group="components">
+        <transition-group type="transition" name="flip-list">
         <div v-for="(select,index) in selections" v-bind:key="index">
         <div class="card text-white border-dark bg-dark mb-3">
         <div class="card-body">
@@ -95,6 +96,7 @@
         </div>
         </div>
         </div>
+        </transition-group>
         </draggable>
         </div>
         <!-- @click="removeSelection(select)" -->
@@ -246,7 +248,7 @@ export default {
       this.selected = '';
       this.$toast.open({
           message:  'Widget added successful!',
-          duration: this.form.duration,
+          duration: 3000,
           type: 'success',
           position: 'top'
         })
@@ -341,6 +343,9 @@ export default {
   margin-right: 25px;
   margin-top: 25px;
   cursor: all-scroll;
+}
+.flip-list-move {
+  transition: transform 0.5s;
 }
 
 @media all and (max-width: 768px) and (orientation: portrait){
