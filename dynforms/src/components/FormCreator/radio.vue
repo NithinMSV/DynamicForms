@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-sm">
         <h3>Radio Layout</h3>
+        <h3>{{radio.text}}</h3>
       <b-form-radio-group
       v-model="selected" 
       :options="optionsSelections"
@@ -15,9 +16,54 @@
       </div>
       <div class="col-sm">
         <h3>Properties</h3>
+         <b-form-checkbox
+      id="required-checkbox"
+      v-model="requiredstatus"
+      name="required-checkbox"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+      Check this to make this field required.
+    </b-form-checkbox>
+        <div>
+          <b-form-input
+            v-model="radio.text"
+            placeholder="Enter the checkbox text"
+            :disabled="!isRadioEditing"
+            :class="{ view: !isRadioEditing }"
+          ></b-form-input>
+          <div class="mt-2">Value: {{ radio.text }}</div>
+        </div>
+        <b-button
+          variant="outline-primary"
+          class="mb-2"
+          @click="isRadioEditing = !isRadioEditing"
+          v-if="!isRadioEditing"
+        >
+          <b-icon icon="gear-fill" aria-hidden="true"></b-icon> Edit</b-button
+        >
+        <b-button
+          @click="RadioSave"
+          variant="outline-primary"
+          class="mb-2"
+          v-else-if="isRadioEditing"
+        >
+          <b-icon icon="check2-square" aria-hidden="true"></b-icon>
+          Save</b-button
+        >
+        <b-button
+          class="mr-auto mb-2"
+          @click="RadioCancel"
+          variant="outline-warning"
+          v-if="isRadioEditing"
+        >
+          <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon>
+          Cancel</b-button
+        >
+    <div>
     <b-form-input v-model="selectedOption" v-on:keyup.enter="result(selectedOption)" placeholder="Enter the options"></b-form-input>
     <div>Update option: <strong>{{ selectedOption }}</strong></div>
-    <b-button variant="outline-success" v-on:click="result(selectedOption)" class="mb-2">
+    <b-button variant="outline-success" v-on:keyup.enter="result(selectedOption)" v-on:click="result(selectedOption)" class="mb-2">
         <b-icon icon="plus-circle-fill" aria-hidden="true"></b-icon>
     </b-button>
     <div>Updated options: <strong>{{ optionsSelections }}</strong></div>
@@ -30,7 +76,8 @@
         </b-button>
       </li>
     </ol>
-  </div>
+    </div>
+    </div>
   </div>
   </div>
 </template>
@@ -45,9 +92,17 @@
         optSelected: '',
         optionsSelections: [],
         counter: 0,
-        exists: null
+        exists: null,
+        isRadioEditing: false,
+        requiredstatus: 'not_accepted',
+        radio: {
+          text: ''
+        }
       }
     },
+    mounted() {
+    this.cachedRadio = Object.assign({}, this.radio);
+  },
     methods: {
         result: function(selectedOption) {
       // alert("Clicked: " + selected);
@@ -93,6 +148,14 @@
           position: 'top'
         })
     },
+     RadioSave() {
+      this.cachedRadio = Object.assign({}, this.radio);
+      this.isRadioEditing = false;
+    },
+    RadioCancel() {
+      this.radio = Object.assign({}, this.cachedRadio);
+      this.isRadioEditing = false;
+    },
   }
   }
 </script>
@@ -109,5 +172,10 @@ h3
 
 .mb-2 {
   margin-left: 20px;
+}
+.view {
+  border-color: transparent;
+  background-color: initial;
+  color: initial
 }
 </style>
