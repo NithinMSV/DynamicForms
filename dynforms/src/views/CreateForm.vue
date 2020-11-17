@@ -85,8 +85,9 @@
         <Btn btnname="Submit"/>
         </div>
         </div>
-        <div class="col-sm">
+        <div class="col-2">
         <b-button variant="outline-danger" class="mb-2" @click="removeSelection(select)">
+          Widget Delete
           <b-icon icon="trash" aria-hidden="true"></b-icon>
         </b-button>
         </div>

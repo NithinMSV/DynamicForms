@@ -1,7 +1,13 @@
 <template>
-    <div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h3>Dropdown Layout</h3>
     <b-form-select v-model="selected" value-field="text" :options="optionsSelections"></b-form-select>
     <div>Selected options: <strong>{{ selected }}</strong></div>
+      </div>
+      <div class="col-sm">
+        <h3>Properties</h3>
     <b-form-input v-model="selectedOption" v-on:keyup.enter="result(selectedOption)" placeholder="Enter the options"></b-form-input>
     <div>Update option: <strong>{{ selectedOption }}</strong></div>
     <b-button variant="outline-success" v-on:click="result(selectedOption)" class="mb-2">
@@ -17,6 +23,8 @@
         </b-button>
       </li>
     </ol>
+    </div>
+    </div>
     </div>
 </template>
 
@@ -85,7 +93,9 @@
 li {
   text-align: left;
 }
-
+h3 {
+  color: white;
+}
 .mb-2 {
   margin-left: 20px;
 }

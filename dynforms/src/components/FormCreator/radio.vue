@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h3>Radio Layout</h3>
       <b-form-radio-group
       v-model="selected" 
       :options="optionsSelections"
@@ -9,7 +12,9 @@
       </b-form-radio-group>
 
     <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
-
+      </div>
+      <div class="col-sm">
+        <h3>Properties</h3>
     <b-form-input v-model="selectedOption" v-on:keyup.enter="result(selectedOption)" placeholder="Enter the options"></b-form-input>
     <div>Update option: <strong>{{ selectedOption }}</strong></div>
     <b-button variant="outline-success" v-on:click="result(selectedOption)" class="mb-2">
@@ -25,6 +30,8 @@
         </b-button>
       </li>
     </ol>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -93,6 +100,11 @@
 <style lang="scss" scoped>
 li {
   text-align: left;
+}
+
+h3 
+{
+  color: white;
 }
 
 .mb-2 {
