@@ -60,6 +60,9 @@
         <div v-if="select.value === 'Checkbox'">
         <checkbox />
         </div>
+        <div v-if="select.value === 'Checkbox Group'">
+        <checkboxgroup />
+        </div>
         <div v-if="select.value === 'Radio Button'">
         <radio />
         </div>
@@ -118,6 +121,7 @@ import Textfield from '../components/FormCreator/text'
 import Messagefield from '../components/FormCreator/message'
 import dropdown from '../components/FormCreator/dropdown'
 import checkbox from '../components/FormCreator/checkbox'
+import checkboxgroup from '../components/FormCreator/checkboxgroup'
 import radio from '../components/FormCreator/radio'
 import file from '../components/FormCreator/file'
 import date from '../components/FormCreator/date'
@@ -143,7 +147,8 @@ export default {
     date,
     rating,
     askquestions,
-    draggable
+    draggable,
+    checkboxgroup
   },
   data() {
     return{
@@ -194,6 +199,10 @@ export default {
       {
         name: 'Checkbox',
         value: 'Checkbox'
+      },
+      {
+        name: 'Checkbox Group',
+        value: 'Checkbox Group'
       },
       {
         name: 'Radio Button',
