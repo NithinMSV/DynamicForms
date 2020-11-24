@@ -43,9 +43,9 @@
           Cancel</b-button
         >
         <b-form-checkbox
-      id="required-checkbox"
+      id="dropdown-required-checkbox"
       v-model="requiredstatus"
-      name="required-checkbox"
+      name="dropdown-required-checkbox"
       value="accepted"
       unchecked-value="not_accepted"
     >
@@ -84,7 +84,7 @@
         isDropdownEditing: false,
         counter: 0,
         dropdown: {
-          text: ''
+          text: 'Edit to rename me!'
         }
       }
     },

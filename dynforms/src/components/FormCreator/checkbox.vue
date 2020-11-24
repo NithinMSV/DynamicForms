@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       checkbox: {
-        text: "",
+        text: 'Edit to rename me!',
       },
       status: "not_accepted",
       isCheckBoxEditing: false,

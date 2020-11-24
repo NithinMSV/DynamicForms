@@ -46,11 +46,11 @@ export default {
     data() {
       return {
          email: {
-          emailplaceholder: ''
+          emailplaceholder: 'Edit to rename me!'
         },
         isPlaceHolderEditing: false,
-        placeholder: '',
-        emailtext:''
+        placeholder: 'Edit to rename me!',
+        emailtext:'Edit to rename me!'
       }
     },
      mounted() {

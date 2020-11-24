@@ -15,8 +15,7 @@
     ></b-form-checkbox-group>
     <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
   </div>
-  <div class="col-sm">
-       <div class="col-sm">
+  <div class="col-sm props">
         <h3>Properties</h3>
          <b-form-checkbox
       id="required-checkbox"
@@ -79,7 +78,6 @@
     </ol>
   </div>
 </div>
-    </div>
 </div>
 </template>
 
@@ -90,7 +88,7 @@
       return {
         selected: [],
         checkboxgroup: {
-            item: ''
+            item: 'Edit to rename me!'
         },
         isCheckBoxGroupEditing: false,
         groupSelectedOption: '',
@@ -164,5 +162,9 @@
   border-color: transparent;
   background-color: initial;
   color: initial
+}
+
+h3 {
+  color: white;
 }
 </style>

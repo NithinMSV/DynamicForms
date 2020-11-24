@@ -2,9 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <h3>Text Box Layout</h3>
+        <h3>Name Layout</h3>
+        <div v-show="prefixstatus === 'accepted'">
     <b-form-select v-model="selected" :options="prefixes"></b-form-select>
     <div class="mt-2">Selected: {{ selected }}</div>
+    </div>
     <span>{{save.namelabel}}</span><b-form-input v-model="text" :placeholder="placeholder.textplaceholder"></b-form-input>
     <div class="mt-2">Name Entered: {{ text }}</div>
       </div>
@@ -24,9 +26,9 @@
     <div>State: <strong>{{ prefixstatus }}</strong></div>
       </div>
     <b-form-checkbox
-      id="required-checkbox"
+      id="name-required-checkbox"
       v-model="requiredstatus"
-      name="required-checkbox"
+      name="name-required-checkbox"
       value="accepted"
       unchecked-value="not_accepted"
     >
@@ -35,6 +37,8 @@
 
     <div>State: <strong>{{ requiredstatus }}</strong></div>
     <div>
+      <b-form-group 
+          label="Enter the textbox name">
       <b-form-input v-model="save.namelabel" placeholder="Enter text box name" :disabled="!isLabelEditing"
            :class="{labelview: !isLabelEditing}"></b-form-input>
     <div class="mt-2">Textbox Name Entered: {{ save.namelabel }}</div>
@@ -44,19 +48,21 @@
         <b-icon icon="check2-square" aria-hidden="true"></b-icon> Save</b-button>
       <b-button class="mr-auto mb-2" @click="nameLabelCancel" variant="outline-warning" v-if="isLabelEditing">
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
+      </b-form-group>
     </div>
-    <div>
+      <b-form-group 
+          label="Enter the placeholder text" >
       <b-form-input v-model="placeholder.textplaceholder" placeholder="Enter placeholder text" 
       :disabled="!isPlaceHolderEditing"
       :class="{phview: !isPlaceHolderEditing}"></b-form-input>
-    <div class="mt-2">Value: {{ placeholder.textplaceholder }}</div>
-    </div>
+    <div class="mt-2">Placeholder text entered: {{ placeholder.textplaceholder }}</div>
     <b-button variant="outline-primary" class="mb-2" @click="isPlaceHolderEditing = !isPlaceHolderEditing" v-if="!isPlaceHolderEditing">
       <b-icon icon="gear-fill" aria-hidden="true"></b-icon> Edit</b-button>
       <b-button @click="namePlaceholderSave" variant="outline-primary" class="mb-2" v-else-if="isPlaceHolderEditing">
         <b-icon icon="check2-square" aria-hidden="true"></b-icon> Save</b-button>
       <b-button class="mr-auto mb-2" @click="namePlaceholderCancel" variant="outline-warning" v-if="isPlaceHolderEditing">
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
+      </b-form-group>
     </div>
     </div>
   </div>
@@ -68,10 +74,10 @@ export default {
     data() {
       return {
         save: {
-          namelabel: ''
+          namelabel: 'Edit to rename me!'
         },
         placeholder: {
-          textplaceholder: ''
+          textplaceholder: 'Edit to rename me!'
         },
         prefixstatus: 'not_accepted',
         requiredstatus: 'not_accepted',
@@ -124,13 +130,13 @@ export default {
 .labelview {
   border-color: transparent;
   background-color: initial;
-  color: initial
+  color: initial;
 }
 
 .phview {
   border-color: transparent;
   background-color: initial;
-  color: initial
+  color: initial;
 }
 
 .container {

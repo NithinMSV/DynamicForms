@@ -28,8 +28,8 @@
     <div class="formarea">
       <h3>Component Creator</h3>
       <div class="drop">
-        <draggable class="list-group" :list="selections" group="components">
-        <transition-group type="transition" name="flip-list">
+        <!-- <draggable class="list-group" :list="selections" group="components"> -->
+        <!-- <transition-group type="transition" name="flip-list"> -->
         <div v-for="(select,index) in selections" v-bind:key="index">
         <div class="card text-white border-dark bg-dark mb-3">
         <div class="card-body">
@@ -48,8 +48,8 @@
         <div v-if="select.value === 'Email Address'">
         <email />
         </div>
-        <div v-if="select.value === 'Address (Single Text Box)'">
-        <Messagefield placeholder="Enter Address"/>
+        <div v-if="select.value === 'Address'">
+        <Address />
         </div>
         <div v-if="select.value === 'Dropdown'">
         <dropdown />
@@ -71,9 +71,6 @@
         </div>
         <div v-if="select.value === 'File Upload'">
         <file />
-        </div>
-        <div v-if="select.value === 'Message'">
-        <Messagefield placeholder="Enter Message"/>
         </div>
         <div v-if="select.value === 'Ask Questions'">
         <askquestions />
@@ -100,8 +97,8 @@
         </div>
         </div>
         </div>
-        </transition-group>
-        </draggable>
+        <!-- </transition-group> -->
+        <!-- </draggable> -->
         </div>
         <!-- @click="removeSelection(select)" -->
       <!-- <div v-for="(select,index) in selections" v-bind:key="index">
@@ -118,7 +115,7 @@ import Name from '../components/FormCreator/name'
 import Btn from '../components/FormCreator/button'
 import email from '../components/FormCreator/email'
 import Textfield from '../components/FormCreator/text'
-import Messagefield from '../components/FormCreator/message'
+import Address from '../components/FormCreator/address'
 import dropdown from '../components/FormCreator/dropdown'
 import checkbox from '../components/FormCreator/checkbox'
 import checkboxgroup from '../components/FormCreator/checkboxgroup'
@@ -129,7 +126,7 @@ import rating from '../components/FormCreator/rating'
 import contact from '../components/FormCreator/contact'
 import askquestions from '../components/FormCreator/askquestion'
 
-import draggable from 'vuedraggable'
+//import draggable from 'vuedraggable'
 
 export default { 
   name: "FormWidgets",
@@ -138,7 +135,7 @@ export default {
     Btn,
     Textfield,
     email,
-    Messagefield,
+    Address,
     dropdown,
     checkbox,
     contact,
@@ -147,7 +144,7 @@ export default {
     date,
     rating,
     askquestions,
-    draggable,
+    // draggable,
     checkboxgroup
   },
   data() {
@@ -155,7 +152,7 @@ export default {
       fn: '',
       ln: '',
       text: '',
-      selected:'',
+      selected:'Choose...',
       selections: [],
       // form: {
       //   message: 'This is a sample message',
@@ -181,7 +178,7 @@ export default {
         value: 'Text Box'
       },
       {
-        name: 'Address (Single Text Box)',
+        name: 'Address',
         value: 'Address'
       },
       {
@@ -207,10 +204,6 @@ export default {
       {
         name: 'Radio Button',
         value: 'Radio Button'
-      },
-      {
-        name: 'Message',
-        value: 'Message'
       },
       {
         name: 'Button',
@@ -255,7 +248,7 @@ export default {
       this.selections.push({
         value: this.selected
       });
-      this.selected = '';
+      this.selected = 'Choose...';
       this.$toast.open({
           message:  'Widget added successful!',
           duration: 3000,

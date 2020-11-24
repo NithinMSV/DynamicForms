@@ -1,6 +1,28 @@
 <template>
-<div class="wrapper">
-    <div class="w-100">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h3>Question Layout</h3>
+      <p>{{save.asklabel}}</p>
+        <b-form-textarea
+      id="textarea"
+      v-model="textarea"
+      placeholder="Enter the text"
+      rows="3"
+      max-rows="6"
+    ></b-form-textarea>
+    </div>
+    <div class="col-sm">
+      <h3>Properties</h3>
+      <b-form-checkbox
+      id="ask-required-checkbox"
+      v-model="requiredstatus"
+      name="ask-required-checkbox"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+      Check this to make this field required.
+    </b-form-checkbox>
         <b-form-input v-model="save.asklabel" placeholder="ask a question?" :disabled="!isEditing"
            :class="{view: !isEditing}"></b-form-input>
         <b-button variant="outline-primary" class="mb-2" @click="isEditing = !isEditing" v-if="!isEditing">
@@ -10,28 +32,27 @@
       <b-button class="mr-auto mb-2" @click="labelCancel" variant="outline-warning" v-if="isEditing">
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
     <div class="mt-2">Question Entered: {{ save.asklabel }}</div>
-        <Message placeholder="Answer Area" />
+    </div>
     </div>
 </div>
 </template>
 
 <script>
 
-import Message from './message'
-
 export default {
     name: 'askquestions',
     components: {
-        Message
     },
     data() {
         return{
           isEditing: false,
           selected: '',
           save: {
-            asklabel: ''
+            asklabel: 'Edit to rename me!'
           },
-          text: ''
+          text: '',
+          textarea: '',
+          requiredstatus: 'not_accepted'
       }
     },
     mounted() {
@@ -55,5 +76,8 @@ export default {
   border-color: transparent;
   background-color: initial;
   color: initial
+}
+h3 {
+  color: white;
 }
 </style>

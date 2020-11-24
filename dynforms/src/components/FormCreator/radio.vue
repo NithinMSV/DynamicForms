@@ -17,9 +17,9 @@
       <div class="col-sm">
         <h3>Properties</h3>
          <b-form-checkbox
-      id="required-checkbox"
+      id="radio-required-checkbox"
       v-model="requiredstatus"
-      name="required-checkbox"
+      name="radio-required-checkbox"
       value="accepted"
       unchecked-value="not_accepted"
     >
@@ -96,7 +96,7 @@
         isRadioEditing: false,
         requiredstatus: 'not_accepted',
         radio: {
-          text: ''
+          text: 'Edit to rename me!'
         }
       }
     },
