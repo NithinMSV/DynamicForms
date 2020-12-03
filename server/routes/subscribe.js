@@ -8,10 +8,10 @@ router.get('/',async (req, res) => {
     try{
         const subscribes = await subscribe.find();
         res.json(subscribes);
-        return;
+        // return;
     } catch(err) {
         res.send('Error' + err);
-        return;
+        // return;
     }
 });
 
@@ -27,11 +27,14 @@ router.post('/', async (req, res) => {
     try{
         const subs = await newsubscribe.save()
         res.json(subs);
+        res.status(200);
+        res.end()
         // return;
     }
 
     catch(err) {
-    res.send("Error:" + err);
+    res.status(400).send("Error:" + err);
+    res.end()
     // return;
 }
 });
@@ -51,10 +54,12 @@ router.delete('/:subId', async (req, res) => {
     try {
         const removedSubscriber = await subscribe.remove({ _id: req.params.subId});
         res.json(removedSubscriber);
+        // return;
     } catch(err) {
         res.json({
             message: err
         });
+        // return;
     }
 });
 module.exports = router;

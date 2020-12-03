@@ -2,7 +2,12 @@
 <div class="container">
     <div class="row">
       <div class="col-sm">
-        <h3>File Upload Layout</h3>
+      <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
         <h3>{{file.text}}</h3>
     <b-form-file
       v-model="file1"
@@ -13,8 +18,27 @@
     <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>
     </div>
     <div class="col-sm">
-        <h3>Properties</h3>
+    <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('file-properties')">Set Properties</b-button>
+
+  <b-modal id="file-properties" hide-footer>
+    <template #modal-title>
+      File Properties
+    </template>
+    <div class="d-block text-center">
+       <b-form-checkbox
+          id="checkbox-required"
+          v-model="requiredstatus"
+          name="checkbox-required"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          Check this to make this field required.
+        </b-form-checkbox>
+
         <div>
+          State: <strong>{{ status }}</strong>
+        </div>
+      <div>
           <b-form-group 
           label="Enter the file text" >
           <b-form-input
@@ -53,6 +77,9 @@
           Cancel</b-button
         >
       </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('file-properties')">Close</b-button>
+  </b-modal>
+</div>
 </div>
 </div>
 </template>
@@ -67,7 +94,8 @@
         },
         file1: null,
         file2: null,
-        isFileEditing: false
+        isFileEditing: false,
+        requiredstatus: 'not_accepted'
       };
     },
     mounted() {

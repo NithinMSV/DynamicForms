@@ -3,6 +3,7 @@
     <Nav />
     <Welcome />
     <Explain />
+    <Subscribes />
   </div>
 </template>
 
@@ -12,13 +13,15 @@
 import Nav from '@/components/Nav/nav'
 import Welcome from '@/components/Home/land'
 import Explain from '@/components/Home/demo'
+import Subscribes from '@/components/Home/subscribe'
 
 export default {
   name: 'Home',
   components: {
     Nav,
     Welcome,
-    Explain
+    Explain,
+    Subscribes
   }
 }
 </script>

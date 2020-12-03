@@ -1,8 +1,13 @@
 <template>
   <div class="container">
     <div class="row">
+      <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
       <div class="col-sm">
-        <h3>Check Box Layout</h3>
         <b-form-checkbox
           id="checkbox-1"
           v-model="status"
@@ -18,8 +23,27 @@
         </div>
       </div>
       <div class="col-sm">
-        <h3>Properties</h3>
+        <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('checkbox-properties')">Set Properties</b-button>
+
+  <b-modal id="checkbox-properties" hide-footer>
+    <template #modal-title>
+      Properties
+    </template>
+    <div class="d-block text-center">
+      <b-form-checkbox
+          id="checkbox-required"
+          v-model="requiredstatus"
+          name="checkbox-required"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          Check this to make this field required.
+        </b-form-checkbox>
+
         <div>
+          State: <strong>{{ status }}</strong>
+        </div>
+        <b-form-group label="Enter the Label name">
           <b-form-input
             v-model="checkbox.text"
             placeholder="Enter the checkbox text"
@@ -27,7 +51,7 @@
             :class="{ phview: !isCheckBoxEditing }"
           ></b-form-input>
           <div class="mt-2">Value: {{ checkbox.text }}</div>
-        </div>
+        </b-form-group>
         <b-button
           variant="outline-primary"
           class="mb-2"
@@ -55,6 +79,9 @@
           Cancel</b-button
         >
       </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('checkbox-properties')">Close</b-button>
+  </b-modal>
+  </div>
     </div>
   </div>
 </template>
@@ -68,6 +95,7 @@ export default {
         text: 'Edit to rename me!',
       },
       status: "not_accepted",
+      requiredstatus: "not_accepted",
       isCheckBoxEditing: false,
     };
   },

@@ -2,19 +2,32 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <h3>Dropdown Layout</h3>
+      <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
         <h3>{{dropdown.text}}</h3>
     <b-form-select v-model="selected" value-field="text" :options="optionsSelections"></b-form-select>
     <div>Selected options: <strong>{{ selected }}</strong></div>
       </div>
       <div class="col-sm">
-        <h3>Properties</h3>
-         <b-form-input
+      <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('dropdown-properties')">Set Properties</b-button>
+
+  <b-modal id="dropdown-properties" hide-footer>
+    <template #modal-title>
+      Dropdown Properties
+    </template>
+    <div class="d-block text-center">
+      <b-form-group label="Enter the Label name">
+      <b-form-input
             v-model="dropdown.text"
             placeholder="Enter the dropdown text"
             :disabled="!isDropdownEditing"
             :class="{ view: !isDropdownEditing }"
           ></b-form-input>
+      </b-form-group>
           <div class="mt-2">Value: {{ dropdown.text }}</div>
         <b-button
           variant="outline-primary"
@@ -66,6 +79,9 @@
         </b-button>
       </li>
     </ol>
+    </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('dropdown-properties')">Close</b-button>
+  </b-modal>        
     </div>
     </div>
     </div>

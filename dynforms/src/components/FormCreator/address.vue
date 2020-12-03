@@ -1,5 +1,11 @@
 <template>
 <div class="container">
+  <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
   <div class="row">
     <div class="col-sm">
       <b-form-group
@@ -60,16 +66,22 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm align">
-      <h3>Properties</h3>
-      <div class="w-50">
+    <div class="col-sm">
+      <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('address-properties')">Set Properties</b-button>
+
+  <b-modal id="address-properties" hide-footer>
+    <template #modal-title>
+      Properties
+    </template>
+    <div class="d-block text-center">
+      <b-form-group label="Enter the Label name">
       <b-form-input
-            label="Enter the Address Label text"
             v-model="address.label"
             placeholder="Enter the Address Label text"
             :disabled="!isAddressLabelEditing"
             :class="{ view: !isAddressLabelEditing }"
           ></b-form-input>
+      </b-form-group>
       </div>
           <div class="mt-2">Value: {{ address.label }}</div>
         <b-button
@@ -108,6 +120,8 @@
       Check this to make this field required.
     </b-form-checkbox>
     <div>{{requiredstatus}}</div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('address-properties')">Close</b-button>
+  </b-modal>
     </div>
   </div>
 </div>
@@ -151,8 +165,5 @@ export default {
 <style lang="scss" scoped>
 h3 {
   color: white;
-}
-.align {
-  text-align: center;
 }
 </style>

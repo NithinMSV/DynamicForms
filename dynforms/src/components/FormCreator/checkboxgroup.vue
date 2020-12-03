@@ -2,8 +2,13 @@
 <div class="container">
     <div class="row">
       <div class="col-sm">
-        <h3>Check Box Group Layout</h3>
         <p>{{checkboxgroup.item}}</p>
+    <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
     <b-form-checkbox-group
       v-model="selected"
       :options="optionsSelections"
@@ -16,8 +21,14 @@
     <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
   </div>
   <div class="col-sm props">
-        <h3>Properties</h3>
-         <b-form-checkbox
+  <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('checkbg-properties')">Set Properties</b-button>
+
+  <b-modal id="checkbg-properties" hide-footer>
+    <template #modal-title>
+      Checkbox Group Properties
+    </template>
+    <div class="d-block text-center">
+    <b-form-checkbox
       id="required-checkbox"
       v-model="requiredstatus"
       name="required-checkbox"
@@ -27,12 +38,14 @@
       Check this to make this field required.
     </b-form-checkbox>
         <div>
+          <b-form-group label="Enter the Label name">
           <b-form-input
             v-model="checkboxgroup.item"
             placeholder="Enter the checkbox text"
             :disabled="!isCheckBoxGroupEditing"
             :class="{ view: !isCheckBoxGroupEditing }"
           ></b-form-input>
+          </b-form-group>
           <div class="mt-2">Value: {{ checkboxgroup.item }}</div>
         </div>
         <b-button
@@ -61,7 +74,9 @@
           <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon>
           Cancel</b-button
         >
+        <b-form-group label="Enter the options:">
          <b-form-input v-model="groupSelectedOption" v-on:keyup.enter="result(groupSelectedOption)" placeholder="Enter the options"></b-form-input>
+        </b-form-group>
     <div>Update option: <strong>{{ groupSelectedOption }}</strong></div>
     <b-button variant="outline-success" v-on:keyup.enter="result(groupSelectedOption)" v-on:click="result(groupSelectedOption)" class="mb-2">
         <b-icon icon="plus-circle-fill" aria-hidden="true"></b-icon>
@@ -76,6 +91,9 @@
         </b-button>
       </li>
     </ol>
+    </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('checkbg-properties')">Close</b-button>
+  </b-modal>
   </div>
 </div>
 </div>

@@ -1,18 +1,30 @@
 <template>
   <div class="container">
     <div class="row">
+      <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
       <div class="col-sm">
-        <h3>Name Layout</h3>
         <div v-show="prefixstatus === 'accepted'">
     <b-form-select v-model="selected" :options="prefixes"></b-form-select>
     <div class="mt-2">Selected: {{ selected }}</div>
     </div>
-    <span>{{save.namelabel}}</span><b-form-input v-model="text" :placeholder="placeholder.textplaceholder"></b-form-input>
+    <span>{{save.namelabel}}</span>
+    <b-form-input v-model="text" :placeholder="placeholder.textplaceholder"></b-form-input>
     <div class="mt-2">Name Entered: {{ text }}</div>
       </div>
-      <div class="col-sm">
-        <h3>Properties</h3>
-        <div>
+    <div class="col-sm">
+  <b-button variant="primary" class="mt-2" id="show-btn" @click="$bvModal.show('name-properties')">Set Properties</b-button>
+    </div>
+  <b-modal id="name-properties" hide-footer>
+    <template #modal-title>
+      Properties
+    </template>
+    <div class="d-block text-center">
+      <div>
     <b-form-checkbox
       id="prefix-checkbox"
       v-model="prefixstatus"
@@ -64,8 +76,10 @@
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
       </b-form-group>
     </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('name-properties')">Close</b-button>
+  </b-modal>
+</div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -144,5 +158,8 @@ export default {
     color: white;
   }
 }
-
+.align {
+    text-align: left;
+    justify-content: left;
+  }
 </style>

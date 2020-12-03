@@ -34,10 +34,13 @@
         <div class="card text-white border-dark bg-dark mb-3">
         <div class="card-body">
         <div class="container" id="element">
-          <a-tooltip placement="right" title="I'm Draggable :)">
+          <!-- <a-tooltip placement="right" title="I'm Draggable :)"> -->
         <div class="row justify-content-around">
         <div class="col-sm">
-          {{select.value}}
+          {{select.value}} Layout
+        <div v-if="select.value === 'Logo'">
+        <Logo />
+        </div>
         <div v-if="select.value === 'Name'">
         <name />
         </div>
@@ -84,15 +87,13 @@
         <div v-if="select.value === 'Button'">
         <Btn btnname="Submit"/>
         </div>
-        </div>
-        <div class="col-2">
-        <b-button variant="outline-danger" class="mb-2" @click="removeSelection(select)">
+        <b-button variant="outline-danger" class="mb-2 mt-2" @click="removeSelection(select)">
           Widget Delete
           <b-icon icon="trash" aria-hidden="true"></b-icon>
         </b-button>
         </div>
         </div>
-        </a-tooltip>
+        <!-- </a-tooltip> -->
         </div>
         </div>
         </div>
@@ -112,6 +113,7 @@
 <script>
 
 import Name from '../components/FormCreator/name'
+import Logo from '../components/FormCreator/logo'
 import Btn from '../components/FormCreator/button'
 import email from '../components/FormCreator/email'
 import Textfield from '../components/FormCreator/text'
@@ -132,6 +134,7 @@ export default {
   name: "FormWidgets",
   components: {
     Name,
+    Logo,
     Btn,
     Textfield,
     email,

@@ -2,7 +2,12 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <h3>Question Layout</h3>
+      <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
       <p>{{save.asklabel}}</p>
         <b-form-textarea
       id="textarea"
@@ -13,8 +18,14 @@
     ></b-form-textarea>
     </div>
     <div class="col-sm">
-      <h3>Properties</h3>
-      <b-form-checkbox
+      <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('ask-properties')">Set Properties</b-button>
+
+  <b-modal id="ask-properties" hide-footer>
+    <template #modal-title>
+      Properties
+    </template>
+    <div class="d-block text-center">
+    <b-form-checkbox
       id="ask-required-checkbox"
       v-model="requiredstatus"
       name="ask-required-checkbox"
@@ -23,8 +34,10 @@
     >
       Check this to make this field required.
     </b-form-checkbox>
+    <b-form-group label="Enter the Label name">
         <b-form-input v-model="save.asklabel" placeholder="ask a question?" :disabled="!isEditing"
            :class="{view: !isEditing}"></b-form-input>
+    </b-form-group>
         <b-button variant="outline-primary" class="mb-2" @click="isEditing = !isEditing" v-if="!isEditing">
       <b-icon icon="gear-fill" aria-hidden="true"></b-icon> Edit</b-button>
       <b-button @click="labelSave" variant="outline-primary" class="mb-2" v-else-if="isEditing">
@@ -32,6 +45,9 @@
       <b-button class="mr-auto mb-2" @click="labelCancel" variant="outline-warning" v-if="isEditing">
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
     <div class="mt-2">Question Entered: {{ save.asklabel }}</div>
+    </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('ask-properties')">Close</b-button>
+  </b-modal>
     </div>
     </div>
 </div>

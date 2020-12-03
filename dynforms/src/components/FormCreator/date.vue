@@ -1,8 +1,13 @@
 <template>
   <div class="container">
     <div class="row">
-      <h3>Date Layout</h3>
       <div class="col-sm">
+    <div id="tooltip-target-1" v-if="requiredstatus === 'accepted'">
+      <p class="h3 mb-2"><b-icon icon="exclamation-circle-fill" animation="cylon" variant="danger"></b-icon></p>
+    <b-tooltip target="tooltip-target-1" triggers="hover">
+        You have chosen this field as mandatory
+      </b-tooltip>
+    </div>
     <label for="example-datepicker" v-show="adddate === 'accepted'">Choose a '{{save.firstdate}}' date</label>
     <label for="example-datepicker" v-show="adddate === 'not_accepted'">{{save.firstdate}}</label>
     <b-form-datepicker id="example-datepicker" v-model="fromdate" class="mb-2"></b-form-datepicker>
@@ -11,14 +16,18 @@
     <div v-show="adddate === 'accepted'" class="col">
       <label for="example-datepicker" v-show="adddate === 'accepted'">Choose a '{{save.seconddate}}' date</label>
       <b-form-datepicker id="example-datepicker" v-model="todate" class="mb-2"></b-form-datepicker>
-    <p>Value: '{{ todate }}'</p>
+    <p>Date Selected: '{{ todate }}'</p>
     </div>
-    </div>
-    <div class="row">
-      <h3>Properties</h3>
     </div>
     <div class="row">
       <div class="col">
+        <b-button id="show-btn" class="mt-2" variant="primary" @click="$bvModal.show('date-properties')">Set Properties</b-button>
+
+  <b-modal id="date-properties" hide-footer>
+    <template #modal-title>
+      Date Properties
+    </template>
+    <div class="d-block text-center">
       <b-form-checkbox
       id="date-required-checkbox"
       v-model="requiredstatus"
@@ -37,8 +46,6 @@
     >
       Click here to add 'To' date
     </b-form-checkbox>
-    </div>
-    <div class="col-sm">
     <b-form-group 
           label="Enter the Date Label">
       <b-form-input v-model="save.firstdate" placeholder="Enter text box name" :disabled="!isFirstDateLabelEditing"
@@ -65,6 +72,9 @@
         <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Cancel</b-button>
       </b-form-group>
       </div>
+    </div>
+    <b-button class="mt-3" variant="danger" block @click="$bvModal.hide('date-properties')">Close</b-button>
+  </b-modal>
     </div>
     </div>
   </div>
