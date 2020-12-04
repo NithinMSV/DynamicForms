@@ -4,7 +4,7 @@
     <nav>
       <ul class="navlinks">
         <li><a href="#">Templates</a></li>
-        <li><a href="/create">My Forms</a></li>
+        <li><a href="/creator">My Forms</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">Pricing</a></li>
         <li><a href="#">Support</a></li>

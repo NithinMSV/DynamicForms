@@ -1,6 +1,5 @@
 <template>
   <div class="formcreator">
-    <div class="nav"></div>
     <div class="component-stack">
       <div class="comp-head">
         <h3>Component Stack - Widgets</h3>
@@ -131,7 +130,7 @@ import askquestions from '../components/FormCreator/askquestion'
 //import draggable from 'vuedraggable'
 
 export default { 
-  name: "FormWidgets",
+  name: "CustomMode",
   components: {
     Name,
     Logo,

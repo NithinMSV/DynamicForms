@@ -1,5 +1,7 @@
 <template>
-    <div class="w-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
     <select class="custom-select" id="inputGroupSelect01" v-model="selectedCountry">
             <option selected>Choose...</option>
             <option v-for="(country, index) in countries" :key="index">{{country.code + " - " + country.name}}</option>
@@ -8,6 +10,8 @@
     <b-form-input type="tel" v-model="text" placeholder="Enter your mobile number"></b-form-input>
     <div class="mt-2">Value: {{ text }}</div>
     </div>
+    </div>
+  </div>
 </template>
 
 <script>

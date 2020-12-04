@@ -3,10 +3,10 @@
     <div class="wrap">
     <div class="container">
     <div class="row justify-content-around">
-    <div class="col-4">
+    <div class="col-sm">
         col
     </div>
-    <div class="col-4">
+    <div class="col-sm">
     <!-- <div class="card bg-light border-secondary mb-3" style="max-width: 30rem;"> -->
       <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
