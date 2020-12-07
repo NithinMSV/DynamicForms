@@ -14,7 +14,6 @@ Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
-  name: "Default",
   component: Default,
   children: [
   {
@@ -35,7 +34,6 @@ const routes = [{
 ]},
  {
   path: '/dashboard',
-  name: 'Dashboard',
   component: Dashboard,
   children: [
     {
@@ -46,7 +44,6 @@ const routes = [{
   ]},
   {
   path: '/creator',
-  name: 'Component Creator',
   component: CCLayout,
   children: [
   {

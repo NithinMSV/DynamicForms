@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser'
 //Import Routes
 import Subscribe from './routes/subscribe';
+import FormType from './routes/formtype';
 require('dotenv/config');
 const port = 2022;
 const app = express();
@@ -34,24 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Middlewares
 app.use('/subscribe', Subscribe);
-
-// const members = [
-//     {
-//         id: 1,
-//         name: 'Louis Lane',
-//         status: 'Alive'
-//     },
-//     {
-//         id: 2,
-//         name: 'Superman',
-//         status: 'Dead'
-//     },
-//     {
-//         id: 3,
-//         name: 'Batman',
-//         status: 'alive'
-//     }
-// ]
+app.use('/formtype', FormType)
 
 mongoose.connect(
     process.env.DB_CONNECTION,

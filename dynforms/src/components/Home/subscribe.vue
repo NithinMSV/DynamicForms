@@ -84,9 +84,21 @@ import axios from 'axios';
         axios.post('http://localhost:2022/subscribe', NewSubs)
         .then((response) => {
             console.log(response);
+            this.$toast.open({
+              message:  'You are subscribed now!',
+              duration: 3000,
+              type: 'success',
+              position: 'top'
+        })
         })
         .catch((error) => {
             console.log(error);
+            this.$toast.open({
+              message:  'Please try again',
+              duration: 3000,
+              type: 'error',
+              position: 'top'
+        })
         });
       },
       onReset(evt) {
