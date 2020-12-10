@@ -10,6 +10,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import 'ant-design-vue/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { store } from './store/store'
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -28,5 +29,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

@@ -1,98 +1,81 @@
 <template>
-    <div class="easymode">
-        <h1>Easy Mode</h1>
-        <!-- <p>{{steps[incr]}}</p>
+  <div class="easymode">
+    <h1>Easy Mode</h1>
+    <!-- <p>{{steps[incr]}}</p>
         <p>{{incr}}</p> -->
-        <div v-if="incr === 0">
-            <h1>I'm Type</h1>
-    <div class="container">
-        <div class="row justify-content-center">
-        <div class="col-4">
-        <b-form-input v-model="search" placeholder="Which type of form you want to create?"></b-form-input>
-        <div class="mt-2">Value: {{ search }}</div>
-        </div>
-        <div class="col-4">
-            <b-button variant="outline-primary">Search</b-button>
-        </div>
-        </div>
-        <div class="d-flex flex-row flex-wrap mb-3">
-        <div v-for="(type, index) in filteredType" :key="index">
-            <div class="p-2">
-            <b-form-group>
-            <b-form-radio v-model="radioselected" name="some-radios" :value="type.name">
-            <b-card border-variant="primary">
-                <b-card-text>
-                    {{type.name}}
-                </b-card-text>
-                
-            </b-card>
-            </b-form-radio>
-            </b-form-group>
-            </div>
-            </div>
-        </div>
-        <div>
-            {{radioselected}}
-        </div>
+    <div v-if="incr === 0">
+      <h1>I'm Type</h1>
+      <EasyType />
     </div>
+
+    <div v-if="incr === 1">
+      <h1>Find your {{ message.toLowerCase() }} templates here!</h1>
+      <EasyTemplate />
     </div>
-        
-        <div v-if="incr === 1">
-            <h1>I'm Template</h1>
-        </div>
-        <div v-if="incr === 2">
-            <h1>I'm Fields</h1>
-        </div>
-        <b-button variant="success" @click="incr--" :disabled="incr <= 0">Back</b-button>
-        <b-button class="ml-2" variant="success" @click="incr++" :disabled="incr >= steps.length - 1 || radioselected === ''">Next</b-button>      
+    <div v-if="incr === 2">
+      <h1>I'm Fields</h1>
     </div>
+    <b-button
+      variant="success"
+      @click="prev"
+      :disabled="incr <= 0 && selectedRadio"
+      >Back</b-button
+    >
+    <b-button
+      class="ml-2"
+      variant="success"
+      @click="next"
+      :disabled="incr >= steps.length - 1 || !selectedRadio"
+      >Next</b-button
+    >
+  </div>
 </template>
 
 <script>
-
-import axios from 'axios';
+import EasyType from "../components/CreateOptions/EasyMode/easytype";
+import EasyTemplate from "../components/CreateOptions/EasyMode/easytemplate";
 
 export default {
-    name: 'EasyMode',
-    components: {
-
+  name: "EasyMode",
+  components: {
+    EasyType,
+    EasyTemplate,
+  },
+  data() {
+    return {
+      search: "",
+      types: [],
+      radioselected: "",
+      incr: 0,
+      steps: ["Type", "Template", "Fields"],
+      selected: "first",
+    };
+  },
+  methods: {
+    prev() {
+      return this.incr--;
     },
-    data() {
-        return {
-            radioselected: '',
-            search: '',
-            types: [],
-            incr: 0,
-            steps: ['Type', 'Template', 'Fields'],
-            selected: 'first',
-        }
+    next() {
+      return this.incr++;
     },
-    mounted() {
-        axios.get('http://localhost:2022/formtype')
-        .then((response) => {
-            console.log(response.data);
-            this.types = response.data;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    selectedRadio: function() {
+      this.$store.getters.TypeSelected !== null;
     },
-    computed: {
-        filteredType() {
-            return this.types.filter(formtype => {
-                return formtype.name.toLowerCase().includes(this.search.toLowerCase())
-            })
-        }
-    }
-}
+  },
+  computed: {
+    message() {
+      return this.$store.getters.TypeSelected;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .easymode {
-    position: relative;
+  position: relative;
 }
 
 b-form-group {
-    opacity: 0.0;
+  opacity: 0;
 }
 </style>
