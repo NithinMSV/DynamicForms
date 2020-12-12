@@ -8,11 +8,11 @@ export const store = new Vuex.Store ({
         TypeSelected: ''
     },
     mutations: {
-        change(state, TypeSelected) {
+        setType(state, TypeSelected) {
             state.TypeSelected = TypeSelected
         }
     },
-    getters: {
-        TypeSelected: state => state.TypeSelected
-    }
+    // getters: {
+    //     TypeSelected: state => state.TypeSelected
+    // }
 })

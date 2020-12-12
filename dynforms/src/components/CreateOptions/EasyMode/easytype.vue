@@ -13,7 +13,7 @@
           <b-button variant="outline-primary">Search</b-button>
         </div>
       </div>
-      <div class="d-flex flex-row flex-wrap mb-3">
+      <div class="d-flex flex-row flex-wrap mb-3 justify-content-evenly">
         <div v-for="(type, index) in filteredType" :key="index">
           <div class="p-2">
             <b-form-group>
@@ -21,15 +21,16 @@
                 v-model="radioselected"
                 name="some-radios"
                 :value="type.name"
+                v-on:change="set"
               >
-                <div
+                <!-- <div
                   class="card text-white bg-dark mb-3"
                   style="max-width: 18rem;"
                 >
-                  <div class="card-body">
+                  <div class="card-body"> -->
                     {{ type.name }}
-                  </div>
-                </div>
+                  <!-- </div>
+                </div> -->
               </b-form-radio>
             </b-form-group>
           </div>
@@ -38,8 +39,8 @@
       <div>
         {{ radioselected }}
         <div>
-          <button @click="changed">Change Value</button>
-          {{ message }}
+          <!-- <b-button variant="primary" @click="set">Change Value</b-button> -->
+          Vuex State: {{ get }}
         </div>
       </div>
     </div>
@@ -57,6 +58,7 @@ export default {
       search: "",
       radioselected: "",
       types: [],
+      selected: this.radioselected
     };
   },
   mounted() {
@@ -71,9 +73,6 @@ export default {
       });
   },
   methods: {
-    changed() {
-      this.$store.commit("change", this.radioselected);
-    },
   },
   computed: {
     filteredType() {
@@ -81,9 +80,12 @@ export default {
         return formtype.name.toLowerCase().includes(this.search.toLowerCase());
       });
     },
-    message() {
-      return this.$store.getters.TypeSelected;
-    },
+    get(){
+        return this.$store.state.TypeSelected;
+      },
+    set(){
+        return this.$store.commit("setType", this.radioselected)
+    }
   },
 };
 </script>

@@ -1,33 +1,40 @@
 <template>
   <div class="easymode">
-    <h1>Easy Mode</h1>
+    <!-- <h1>Easy Mode</h1> -->
     <!-- <p>{{steps[incr]}}</p>
         <p>{{incr}}</p> -->
     <div v-if="incr === 0">
-      <h1>I'm Type</h1>
+      <h1>Choose your form type!</h1>
       <EasyType />
     </div>
 
     <div v-if="incr === 1">
-      <h1>Find your {{ message.toLowerCase() }} templates here!</h1>
+      <h1>Find your {{ get.toLowerCase() }} templates here!</h1>
       <EasyTemplate />
     </div>
     <div v-if="incr === 2">
       <h1>I'm Fields</h1>
     </div>
     <b-button
+      class="mb-2"
       variant="success"
       @click="prev"
-      :disabled="incr <= 0 && selectedRadio"
-      >Back</b-button
+      v-show="!incr == 0"
+      :disabled="incr <= 0 && isDataExist"
+      >
+      <b-icon icon="chevron-double-left"></b-icon>
+      Back
+      </b-button
     >
     <b-button
-      class="ml-2"
+      class="ml-2 mb-2"
       variant="success"
       @click="next"
-      :disabled="incr >= steps.length - 1 || !selectedRadio"
-      >Next</b-button
-    >
+      :disabled="incr >= steps.length - 1 || !isDataExist"
+      >
+      Next
+      <b-icon icon="chevron-double-right"></b-icon>
+      </b-button>
   </div>
 </template>
 
@@ -45,7 +52,7 @@ export default {
     return {
       search: "",
       types: [],
-      radioselected: "",
+      radioselected: '',
       incr: 0,
       steps: ["Type", "Template", "Fields"],
       selected: "first",
@@ -58,14 +65,14 @@ export default {
     next() {
       return this.incr++;
     },
-    selectedRadio: function() {
-      this.$store.getters.TypeSelected !== null;
-    },
   },
   computed: {
-    message() {
-      return this.$store.getters.TypeSelected;
+    get() {
+      return this.$store.state.TypeSelected;
     },
+    isDataExist() {
+      return this.$store.state.TypeSelected !== '';
+    }
   },
 };
 </script>

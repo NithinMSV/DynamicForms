@@ -15,9 +15,8 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ message }} Results</h5>
+              <h5 class="card-title">{{  }} Results</h5>
               This is some text within a card body.
-              {{ message.toLowerCase() }}
             </div>
           </div>
         </div>
@@ -30,11 +29,7 @@
 export default {
   name: "easytemp",
   components: {},
-  computed: {
-    message() {
-      return this.$store.getters.TypeSelected;
-    },
-  },
+  computed: {},
 };
 </script>
 
