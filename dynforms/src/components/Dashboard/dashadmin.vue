@@ -1,18 +1,17 @@
 <template>
-  <div class="default">
-    <router-view></router-view>
+  <div class="dashhome">
+    <h1>Dashboard Admin Home</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DefaultLayout",
-  components: {},
+  name: "dashboardadmin",
 };
 </script>
 
 <style lang="scss" scoped>
-.default {
+.dashhome {
   position: relative;
 }
 </style>

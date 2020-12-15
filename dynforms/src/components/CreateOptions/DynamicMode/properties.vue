@@ -1,18 +1,18 @@
 <template>
-  <div class="default">
-    <router-view></router-view>
+  <div class="props">
+    <h5>Properties</h5>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DefaultLayout",
-  components: {},
+  name: "properties",
 };
 </script>
 
 <style lang="scss" scoped>
-.default {
+.props {
   position: relative;
+  background-color: white;
 }
 </style>

@@ -13,6 +13,7 @@
           <b-button variant="outline-primary">Search</b-button>
         </div>
       </div>
+
       <div class="d-flex flex-row flex-wrap mb-3 justify-content-evenly">
         <div v-for="(type, index) in filteredType" :key="index">
           <div class="p-2">
@@ -28,8 +29,8 @@
                   style="max-width: 18rem;"
                 >
                   <div class="card-body"> -->
-                    {{ type.name }}
-                  <!-- </div>
+                {{ type.name }}
+                <!-- </div>
                 </div> -->
               </b-form-radio>
             </b-form-group>
@@ -58,10 +59,10 @@ export default {
       search: "",
       radioselected: "",
       types: [],
-      selected: this.radioselected
+      selected: this.radioselected,
     };
   },
-  mounted() {
+  created() {
     axios
       .get("http://localhost:2022/formtype")
       .then((response) => {
@@ -72,20 +73,19 @@ export default {
         console.log(error);
       });
   },
-  methods: {
-  },
+  methods: {},
   computed: {
     filteredType() {
       return this.types.filter((formtype) => {
         return formtype.name.toLowerCase().includes(this.search.toLowerCase());
       });
     },
-    get(){
-        return this.$store.state.TypeSelected;
-      },
-    set(){
-        return this.$store.commit("setType", this.radioselected)
-    }
+    get() {
+      return this.$store.state.TypeSelected;
+    },
+    set() {
+      return this.$store.commit("setType", this.radioselected);
+    },
   },
 };
 </script>

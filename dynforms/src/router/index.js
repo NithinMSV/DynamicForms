@@ -1,74 +1,93 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import Qrmodule from '../components/Qr/qr'
-import Default from '../components/Layouts/Default'
-import Dashboard from '../components/Layouts/Dashboard'
-import CCLayout from '../components/Layouts/CompCreator'
-import StyleOption from '../views/StyleOption'
-import EasyMode from '../views/Easy'
-import CustomMode from '../views/Custom'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+import {
+  Home,
+  About,
+  Qrmodule,
+  Default,
+  Dashboard,
+  CCLayout,
+  StyleOption,
+  EasyMode,
+  CustomMode,
+  Account,
+  DashAdmin,
+  DashPublic,
+} from "./allimports";
 
-const routes = [{
-  path: '/',
-  component: Default,
-  children: [
+Vue.use(VueRouter);
+
+const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    component: Default,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+      },
+      {
+        path: "/about",
+        name: "About",
+        components: About,
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'About',
-    components: About
+    path: "/dashboard",
+    component: Dashboard,
+    children: [
+      {
+        path: "/dashboard/admin",
+        name: "admin",
+        component: DashAdmin,
+      },
+      {
+        path: "/dashboard/public",
+        name: "Account",
+        component: DashPublic,
+      },
+      {
+        path: "/scannow",
+        name: "QrScanner",
+        component: Qrmodule,
+      },
+      {
+        path: "/account",
+        name: "Account",
+        component: Account,
+      },
+    ],
   },
   {
-    path: '/scannow',
-    name: 'QrScanner',
-    component: Qrmodule
-  }
-]},
- {
-  path: '/dashboard',
-  component: Dashboard,
-  children: [
-    {
-      path: '/',
-      name: 'Dashboard',
-      component: Dashboard
-    }
-  ]},
-  {
-  path: '/creator',
-  component: CCLayout,
-  children: [
-  {
-    path: '/',
-    name: 'Style Choice',
-    component: StyleOption 
+    path: "/creator",
+    component: CCLayout,
+    children: [
+      {
+        path: "/",
+        name: "Style Choice",
+        component: StyleOption,
+      },
+      {
+        path: "/easy",
+        name: "easy",
+        component: EasyMode,
+      },
+      {
+        path: "/custom",
+        name: "custom",
+        component: CustomMode,
+      },
+    ],
   },
-  {
-    path: '/easy',
-    name: 'easy',
-    component: EasyMode
-  },
-  {
-    path: '/custom',
-    name: 'custom',
-    component: CustomMode
-  }
-]
-}
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

@@ -11,8 +11,8 @@
       </ul>
     </nav>
     <section class="account-button">
-      <a class="cta" href="#"><button>Sign In</button></a>
-      <a class="cta" href="#"><button>Sign Up</button></a>
+      <a class="cta" href="/account"><button>Sign In</button></a>
+      <a class="cta" href="/account"><button>Sign Up</button></a>
     </section>
   </div>
 </template>
@@ -32,7 +32,9 @@ export default {
   padding: 10px 10%;
 }
 
-li,a,button {
+li,
+a,
+button {
   font-size: 16px;
   text-decoration: none;
 }
@@ -62,17 +64,17 @@ li,a,button {
 }
 
 button {
-    margin-left: 20px;
-    padding: 9px 25px;
-    background-color: rgb(40, 51, 197);
-    border: none;
-    color: white;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: rgb(40, 51, 197);
+  border: none;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
 }
 
 button:hover {
-    background-color: aqua;
+  background-color: aqua;
 }
 </style>
