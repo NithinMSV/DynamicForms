@@ -138,6 +138,9 @@
             <div class="prop-area">
               Properties Area
               <Properties />
+              <a-button @click="antdtest" type="primary">
+                Primary
+              </a-button>
             </div>
           </div>
         </div>
@@ -308,6 +311,9 @@ export default {
     },
     printValue(fn) {
       console.log(fn);
+    },
+    antdtest() {
+      alert("It's Working!");
     },
     // add: function() {
     //   this.selections.push({
