@@ -2,52 +2,117 @@
   <div class="sign-up">
     <h3>Sign Up</h3>
     <div class="sign-up">
-      <label for="signupuserid">Username</label>
-      <b-form-input
-        id="signupuserid"
-        type="text"
-        v-model="signupform.username"
-        placeholder="Enter your username"
-      ></b-form-input>
-      <label for="signupuserpd">Password</label>
-      <b-form-input
-        id="signupuserpd"
-        type="password"
-        v-model="signupform.password"
-        placeholder="Enter password"
-      ></b-form-input>
-      <label for="signupuserpdrpt">Repeat Password</label>
-      <b-form-input
-        id="signupuserpdrpt"
-        type="password"
-        v-model="signupform.repeatpassword"
-        placeholder="Enter your password again"
-      ></b-form-input>
-      <b-button @click="signUpSubmit" class="mt-2" variant="primary"
-        >Sign Up</b-button
+      <el-form
+        ref="signupform"
+        :model="signupform"
+        :rules="rules"
+        label-width="120px"
+        status-icon
       >
+        <el-form-item label="Email" prop="email">
+          <el-input
+            v-model="signupform.email"
+            placeholder="Enter your email"
+            type="email"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Password" prop="password">
+          <el-input
+            v-model="signupform.password"
+            placeholder="Enter your password"
+            type="password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Confirm" prop="confirm">
+          <el-input
+            v-model="signupform.confirm"
+            placeholder="Enter your password again"
+            type="password"
+          ></el-input>
+        </el-form-item>
+        <el-button type="primary" @click="signUpSubmit('signupform')"
+          >Submit</el-button
+        >
+        <el-button type="warning" @click="onReset('signupform')"
+          >Reset</el-button
+        >
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
+import { Message } from "element-ui";
+
 export default {
   name: "signup",
   components: {},
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please input the password"));
+      } else {
+        if (this.signupform.confirm !== "") {
+          this.$refs.signupform.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please input the password again"));
+      } else if (value !== this.signupform.password) {
+        callback(new Error("Two inputs don't match!"));
+      } else {
+        callback();
+      }
+    };
     return {
       signupform: {
-        username: "",
+        email: "",
         password: "",
-        repeatpassword: "",
+        confirm: "",
+      },
+      rules: {
+        email: {
+          required: true,
+          type: "email",
+          message: "Please input correct email address",
+          trigger: ["blur", "change"],
+        },
+        password: {
+          required: true,
+          validator: validatePass,
+          trigger: "blur",
+        },
+        confirm: {
+          required: true,
+          validator: validatePass2,
+          trigger: "blur",
+        },
       },
     };
   },
   methods: {
-    signUpSubmit() {
-      const newform = JSON.stringify(this.signupform);
-      alert(newform);
-      this.signupform = "";
+    signUpSubmit(signupform) {
+      let newSignIn = {
+        email: this.signupform.email,
+        password: this.signupform.password,
+        confirm: this.signupform.confirm,
+      };
+      // let final = JSON.stringify(this.signupform);
+      this.$refs[signupform].validate((valid) => {
+        if (valid) {
+          Message.success("Signed in");
+          console.log(newSignIn);
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    onReset(signupform) {
+      this.$refs[signupform].resetFields();
     },
   },
 };

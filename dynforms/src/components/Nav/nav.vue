@@ -7,12 +7,16 @@
         <li><a href="/creator">My Forms</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">Pricing</a></li>
-        <li><a href="#">Support</a></li>
+        <li><el-link href="#" :underline="false">Support</el-link></li>
       </ul>
     </nav>
     <section class="account-button">
-      <a class="cta" href="/account"><button>Sign In</button></a>
-      <a class="cta" href="/account"><button>Sign Up</button></a>
+      <el-button @click="$router.push('account')" type="primary" round>
+        Sign In</el-button
+      >
+      <el-button type="primary" @click="$router.push('account')" round>
+        Sign Up</el-button
+      >
     </section>
   </div>
 </template>
@@ -20,6 +24,7 @@
 <script>
 export default {
   name: "navigation",
+  methods: {},
 };
 </script>
 
@@ -63,18 +68,18 @@ button {
   }
 }
 
-button {
-  margin-left: 20px;
-  padding: 9px 25px;
-  background-color: rgb(40, 51, 197);
-  border: none;
-  color: white;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-}
+// button {
+//   margin-left: 20px;
+//   padding: 9px 25px;
+//   background-color: rgb(40, 51, 197);
+//   border: none;
+//   color: white;
+//   border-radius: 50px;
+//   cursor: pointer;
+//   transition: all 0.3s ease 0s;
+// }
 
-button:hover {
-  background-color: aqua;
-}
+// button:hover {
+//   background-color: aqua;
+// }
 </style>

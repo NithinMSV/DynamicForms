@@ -2,23 +2,18 @@
   <div class="acc">
     <h3>Account</h3>
     <div class="arrange">
-      <div
-        class="card text-center text-dark bg-light mb-3 border border-dark"
-        style="width: 20rem;"
-      >
-        <div class="card-body">
-          <div v-show="signInShow == true" class="sign-in">
-            <sign-in></sign-in>
-            <a class="card-link" @click="showSignUp">Create an account</a>
-          </div>
-          <div v-show="signInShow == false" class="sign-up">
-            <sign-up></sign-up>
-            <a class="card-link mt-2" @click="showSignIn"
-              >Already have an account?</a
-            >
-          </div>
+      <el-card class="box-card" shadow="always">
+        <div v-show="signInShow == true" class="sign-in">
+          <sign-in></sign-in>
+          <a class="card-link" @click="showSignUp">Create an account</a>
         </div>
-      </div>
+        <div v-show="signInShow == false" class="sign-up">
+          <sign-up></sign-up>
+          <a class="card-link mt-2" @click="showSignIn"
+            >Already have an account?</a
+          >
+        </div>
+      </el-card>
     </div>
   </div>
 </template>
@@ -61,8 +56,33 @@ export default {
 
 .arrange {
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, 20%);
+  top: 70px;
+  left: 35%;
+}
+
+.box-card {
+  width: 480px;
+}
+
+@media screen and (max-width: 786px) and (orientation: portrait) {
+  .arrange {
+    position: absolute;
+    top: 70px;
+    left: 5%;
+  }
+  .box-card {
+    width: 325px;
+  }
+}
+
+@media screen and (max-width: 786px) and (orientation: landscape) {
+  .arrange {
+    position: absolute;
+    top: 70px;
+    left: 17%;
+  }
+  .box-card {
+    width: 480px;
+  }
 }
 </style>
